@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>2f1ecdcf-8e09-44ae-a3a8-303ed07d9439</groupId>
+  <artifactId>bookexample</artifactId>
+  <version>1.0.1</version>
+  <name>BookExample</name>
+  <properties>
+    <classifier>raml-fragment</classifier>
+    <main>bookexample.raml</main>
+    <originalFormatVersion>1.0</originalFormatVersion>
+    <projectId>e575e6ae-23d0-42a0-82a9-b5323a5ffd42</projectId>
+    <branchId>master</branchId>
+    <commitId>05e8cb71ab7addcd60aebda4839d724f61910114</commitId>
+    <type>raml-fragment</type>
+    <mainFile>bookexample.raml</mainFile>
+  </properties>
+  <repositories>
+    <repository>
+      <id>anypoint-exchange</id>
+      <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+    </repository>
+  </repositories>
+</project>
