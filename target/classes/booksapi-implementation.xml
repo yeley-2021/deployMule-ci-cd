@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<configuration-properties doc:name="Configuration properties" doc:id="48b45532-15a1-4cb7-a203-fb164adee6f8" file="config.properties" />
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="31773907-7ac6-4ac2-abee-1d03d8f50aa4" >
+		<db:oracle-connection host="${db.host}" port="${db.port}" user="${db.username}" password="${db.password}" instance="${db.name}" />
+	</db:config>
+	<flow name="booksapi-getAllBooks" doc:id="3aca9850-c3a0-4c76-890d-3c5dcb773f0d" >
+		<db:select doc:name="Select All Books" doc:id="c561d70c-23e4-439e-9235-ef9525a37558" config-ref="Database_Config">
+			<db:sql><![CDATA[SELECT *
+FROM Books
+]]></db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="3cc98ed7-3c54-4ab9-9495-dc1c54fdb586">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="db0e4644-58f3-4b82-bde5-8bc3d1c712fc" message="#[payload]" />
+	</flow>
+	<flow name="booksapi-getBooksWithID" doc:id="0e59aab5-46d5-4f80-9857-188b5e6cb1f1" >
+		<db:select doc:name="Select Book With ID" doc:id="952ac894-d698-4fef-b171-394f35ed7955" config-ref="Database_Config">
+			<db:sql><![CDATA[SELECT *
+FROM Books
+WHERE ID = :bookID
+]]></db:sql>
+			<db:input-parameters><![CDATA[#[{
+	bookID : attributes.uriParams.BookID
+}]]]></db:input-parameters>
+		</db:select>
+		<choice doc:name="Choice" doc:id="a992d6e1-1423-4b52-a874-7c217a75bd5a" >
+			<when expression="#[payload != []]">
+				<ee:transform doc:name="Transform Message" doc:id="f2fcc933-72e0-45a5-b928-96a965a84674">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+			</when>
+			<otherwise >
+				<ee:transform doc:name="Transform Message" doc:id="90f813f0-7618-4b82-a73f-d172f4393db2" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: "Book is not in database."
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</otherwise>
+		</choice>
+		<logger level="INFO" doc:name="Logger" doc:id="53be2a5e-07e9-4bd2-a41d-c6add1692bbb" message="#[payload]" />
+	</flow>
+	<flow name="booksapi-addBook" doc:id="208444a1-e74d-4758-8202-10403d036282" >
+		<ee:transform doc:name="Transform Message" doc:id="ee0f147f-d352-43f3-bfd4-40d8a8d08b10" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<db:bulk-insert doc:name="Bulk insert" doc:id="a0cfb603-ac02-4814-b261-a8aac960155b" config-ref="Database_Config">
+			<db:sql ><![CDATA[INSERT INTO Books (ID, Title ,Description ,PageCount ,Excerpt,AuthorId) 
+VALUES (:ID, :Title,:Description,:PageCount,:Excerpt,:AuthorID)]]></db:sql>
+		</db:bulk-insert>
+		<ee:transform doc:name="Transform Message" doc:id="8231d46e-797d-4434-8101-452074113982" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	StatusCode: "A001",
+  	message: "Books successfully created"
+}
+
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="booksapi-updateBookWithID" doc:id="8ec9db2d-b278-4c13-9df5-2f2d1e8f33c9" >
+		<db:update doc:name="Update" doc:id="7a6ad227-4989-49c6-a33a-f535fbff57cd" config-ref="Database_Config">
+			<db:sql><![CDATA[UPDATE Books
+SET ID = :ID , TITLE = :TITLE, DESCRIPTION = :DESCRIPTION, PAGECOUNT = :PAGECOUNT, EXCERPT = :EXCERPT, AUTHORID = :AUTHORID
+WHERE ID = :ID]]></db:sql>
+			<db:input-parameters><![CDATA[#[{
+	ID : attributes.uriParams.BookID,
+	TITLE : payload.Title,
+	DESCRIPTION : payload.Description,
+	PAGECOUNT : payload.PageCount,
+	EXCERPT : payload.Excerpt,
+	AUTHORID : payload.AuthorID
+}]]]></db:input-parameters>
+		</db:update>
+	</flow>
+	<flow name="booksapi-deleteBookWithID" doc:id="1afa5fba-b5f2-4742-9c8e-d99b808b5fe8" >
+		<db:delete doc:name="Delete book with ID" doc:id="8f97fecc-7df0-4db1-bcf2-d2927f4046f6" config-ref="Database_Config">
+			<db:sql><![CDATA[delete from Books where ID = :ID]]></db:sql>
+			<db:input-parameters><![CDATA[#[{
+	ID : attributes.uriParams.BookID
+}]]]></db:input-parameters>
+		</db:delete>
+		<ee:transform doc:name="Transform Message" doc:id="fd9db442-f610-4e15-ab7a-62556d19b472" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: "Book Deleted Successfully!"
+	
+	}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

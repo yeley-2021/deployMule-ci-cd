@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>2f1ecdcf-8e09-44ae-a3a8-303ed07d9439</groupId>
+  <artifactId>success-message-example</artifactId>
+  <version>1.0.0</version>
+  <name>Success Message Example</name>
+  <properties>
+    <classifier>raml-fragment</classifier>
+    <main>success-message-example.raml</main>
+    <originalFormatVersion>1.0</originalFormatVersion>
+    <projectId>798c8951-0a58-417f-9beb-dbffc6833908</projectId>
+    <branchId>master</branchId>
+    <commitId>530bf6f1502e4099bf936e08a04cea79891aa064</commitId>
+    <type>raml-fragment</type>
+    <mainFile>success-message-example.raml</mainFile>
+  </properties>
+  <repositories>
+    <repository>
+      <id>anypoint-exchange</id>
+      <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+    </repository>
+  </repositories>
+</project>

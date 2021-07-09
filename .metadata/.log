@@ -56,3 +56,15 @@ org.eclipse.osgi,3.16.100.v20201030-1916,1620784738998,System Bundle;com.google.
 !ENTRY org.mule.tooling.core 1 0 2021-07-09 15:04:37.015
 !MESSAGE Started tooling v[4.3.0] with timeout [90s] at path:
 C:\Users\deejay\Desktop\MuleSoft\AnypointStudio\configuration\org.eclipse.osgi\1006\data\.runtimes\tooling-tvan6kuf
+
+!ENTRY org.mule.tooling.core 1 0 2021-07-09 15:05:22.576
+!MESSAGE Mule Version 4.3.0-20210427, was mapped to Tooling Version 4.3.0-20210427
+
+!ENTRY org.mule.tooling.editor.model 1 0 2021-07-09 15:07:17.074
+!MESSAGE Unknow Stereotype [org.mule.tooling.client.api.extension.model.StereotypeModel@71aa4840[type=BEHAVIOR,namespace=MUNIT,parent=<null>]]. Element path will be associated to processorsThis may affect how debugger works.
+
+!ENTRY org.mule.tooling.editor.model 1 0 2021-07-09 15:07:17.077
+!MESSAGE Unknow Stereotype [org.mule.tooling.client.api.extension.model.StereotypeModel@2484b307[type=EXECUTION,namespace=MUNIT,parent=<null>]]. Element path will be associated to processorsThis may affect how debugger works.
+
+!ENTRY org.mule.tooling.editor.model 1 0 2021-07-09 15:07:17.079
+!MESSAGE Unknow Stereotype [org.mule.tooling.client.api.extension.model.StereotypeModel@14c78bea[type=VALIDATION,namespace=MUNIT,parent=<null>]]. Element path will be associated to processorsThis may affect how debugger works.

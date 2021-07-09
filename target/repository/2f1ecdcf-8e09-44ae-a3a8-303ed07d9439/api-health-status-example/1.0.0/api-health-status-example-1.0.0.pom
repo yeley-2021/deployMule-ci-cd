@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>2f1ecdcf-8e09-44ae-a3a8-303ed07d9439</groupId>
+  <artifactId>api-health-status-example</artifactId>
+  <version>1.0.0</version>
+  <name>API Health Status Example</name>
+  <properties>
+    <classifier>raml-fragment</classifier>
+    <main>api-health-status-example.raml</main>
+    <originalFormatVersion>1.0</originalFormatVersion>
+    <projectId>95dde4a6-2667-43b6-b26b-f1b122a4d88a</projectId>
+    <branchId>master</branchId>
+    <commitId>d6ec14158969692c3c015ae11667ae84af0770cf</commitId>
+    <type>raml-fragment</type>
+    <mainFile>api-health-status-example.raml</mainFile>
+  </properties>
+  <repositories>
+    <repository>
+      <id>anypoint-exchange</id>
+      <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+    </repository>
+  </repositories>
+</project>
