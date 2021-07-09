@@ -68,3 +68,6 @@ C:\Users\deejay\Desktop\MuleSoft\AnypointStudio\configuration\org.eclipse.osgi\1
 
 !ENTRY org.mule.tooling.editor.model 1 0 2021-07-09 15:07:17.079
 !MESSAGE Unknow Stereotype [org.mule.tooling.client.api.extension.model.StereotypeModel@14c78bea[type=VALIDATION,namespace=MUNIT,parent=<null>]]. Element path will be associated to processorsThis may affect how debugger works.
+
+!ENTRY org.mule.tooling.ui.contribution.munit 1 1 2021-07-09 15:14:39.633
+!MESSAGE Deleting MUnit temporary folder in C:\Users\deejay\AppData\Local\Temp\munit-temp-dir
